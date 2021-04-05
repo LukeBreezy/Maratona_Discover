@@ -111,7 +111,7 @@ const Job = {
             const job = req.body
         
             // Determinando o ID
-            const job_id = (Job.data[Job.data.length - 1]?.id || 0) + 1
+            const job_id = (Job.data[Job.data.length - 1]?.id || 0) + 1     // o ? é um optional chaining
             job.id = job_id
             job.created_at = Date.now()
         
@@ -154,7 +154,7 @@ const Job = {
         },
 
         delete: (req, res) => {
-            const jobID = req.params.id
+            const jobId = req.params.id
 
             Job.data = Job.data.filter(job => Number(job.id) !== Number(jobId))
 
