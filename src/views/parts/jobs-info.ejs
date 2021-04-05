@@ -1,0 +1,38 @@
+<div class="cards">
+  <div class="card <%= job_status %>" data-id="<%= job_id %>">
+    <div class="id column"><%= job_id %> </div>
+    <div class="name column">
+      <%= job_name %>
+    </div>
+    <div class="deadline column">
+      <span>Prazo</span>
+      <p>
+
+        <% if(job_remaining_days > 0){%>
+          <%= job_remaining_days %> dias para a entrega
+        <% }else{ %>
+          Prazo encerrado
+        <% } %>
+
+      </p>
+    </div>
+    <div class="amount column">
+      <span>Valor</span>
+      <p>R$ <%= job_value.toFixed(2).replace('.', ',') %> </p>
+    </div>
+    <div class="status badge column">
+      <%= job_status === 'done' ? 'Encerrado' : 'Em andamento' %> 
+    </div>
+    <div class="actions column flex">
+      <p class="sr-only">Ações</p>
+      <a 
+      href="/job/<%= job_id %>" 
+      class="button white edit" 
+      title="Editar Job">
+      <img src="/images/edit-24.svg" alt="Editar Job" />
+    </a>
+    <button class="delete button white" title="Excluir Job">
+      <img src="/images/trash-24.svg" alt="Excluir Job" />
+    </button>
+  </div>
+</div>
