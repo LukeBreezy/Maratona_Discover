@@ -1,9 +1,13 @@
 const express = require('express')  //Biblioteca para cria o servidor
 const server = express()
 const routes = require('./routes')  // Importando routes (rotas)
+const path = require('path')
 
 // usando template engine
 server.set('view engine', 'ejs')
+
+// Mudar a localização da pasta views
+server.set('views', path.join(__dirname, 'views'))
 
 //habilitar arquivos statics
 server.use(express.static("public"))    // Usando o a pasta public como diretorio padrão para imagens, estilo e scripts
