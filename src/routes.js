@@ -2,11 +2,12 @@ const express = require('express')  // Biblioteca para criar o servidor
 const routes = express.Router()     // Ser para criar as rotas / caminhos
 const ProfileController = require('./controllers/ProfileController')
 const JobController = require('./controllers/JobController')
+const DashboardController = require('./controllers/DashboardController')
 
 // ROTAS GET E POST
 
 // Index
-routes.get('/', JobController.index)
+routes.get('/', DashboardController.index)
 
 
 // Job

@@ -1,33 +1,8 @@
 const Job = require('../model/Job')
 const Profile = require('../model/Profile')
-const jobUtils = require('../utils/JobUtils')
+const JobUtils = require('../utils/JobUtils')
 
 module.exports = {
-    index: (req, res) => {
-        const jobs = Job.get()
-        const profile = Profile.get()
-
-        const updatedJobs = jobs.map((job) => {
-    
-            const remaining = jobUtils.remainingDays(job)
-    
-            const status = remaining <= 0 ? 'done' : 'progress'
-    
-            return{
-                ...job,
-                remaining,
-                status,
-                budget: profile["value-hour"] * job["total-hours"]
-            }
-        })
-
-        Job.update(
-            updatedJobs
-        )
-
-        res.render("index", { jobs: updatedJobs, profile: profile})
-    },
-
     create(req, res){ 
         return res.render("job")
     },
@@ -37,7 +12,7 @@ module.exports = {
         // req.body == {name: 'DedSec Site', 'daily-hours': '8', 'total-hours': '40'}
         const job = req.body
         const jobs = Job.get()
-    
+
         // Determinando o ID
         const job_id = (jobs[jobs.length - 1]?.id || 0) + 1     // o ? é um optional chaining
         job.id = job_id
@@ -50,6 +25,7 @@ module.exports = {
 
     show: (req, res) => {
 
+        const profile = Profile.get()
         const jobs = Job.get()
         const jobId = req.params.id
 
@@ -58,6 +34,8 @@ module.exports = {
         if(!job){
             return res.send("Job not found!")
         }
+
+        job.budget = JobUtils.calculateBudget(job, profile['value-hour'])
 
         return res.render("job-edit", { job })
     },
@@ -89,7 +67,7 @@ module.exports = {
 
         Job.update(newJob)
 
-        return res.render("job-edit", { job })
+        return res.redirect("/job/" + jobId)
     },
 
     delete: (req, res) => {
