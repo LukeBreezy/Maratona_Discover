@@ -28,15 +28,6 @@ module.exports = {
             data
         )
 
-//        Profile.get() = data
-        /* Tambem posso fazer da seguinte forma
-        Profile.get() = {
-            ...Profile.get(),
-            ...req.body,
-            "value-hour": data["monthly-budget"] / hoursPerMonth
-        }
-        */
-
         return res.redirect('/profile')
     }
 }

@@ -35,7 +35,7 @@ module.exports = {
             total: jobs.length
         }
 
-        // Quantidade de horas livres, baseado na quantidade de horas por dia definida no perfil
+        // Quantidade de horas livres, baseado na jornada diaria definida no perfil
         const freeHours = profile["hours-per-day"] - jobTotalHours
 
         res.render("index", {

@@ -10,7 +10,6 @@ module.exports = {
     async save(req, res){
         // Exemplo de req.body:
         // req.body == {name: 'DedSec Site', 'daily-hours': '8', 'total-hours': '40'}
-        const jobs = await Job.get()
 
         await Job.create({
             ...req.body,
