@@ -4,10 +4,10 @@ const Profile = require('../model/Profile')
 const { update } = require('../model/Job')
 
 module.exports = {
-    index: (req, res) => {
+    async index(req, res){
         // Pegando Jobs e Profile
-        const jobs = Job.get()
-        const profile = Profile.get()
+        const jobs = await Job.get()
+        const profile = await Profile.get()
         
         let jobTotalHours = 0
         
@@ -26,11 +26,6 @@ module.exports = {
                 budget: jobUtils.calculateBudget(job, profile["value-hour"])
             }
         })
-
-        // Devolvendo os jobs atualizados
-        Job.update(
-            updatedJobs
-        )
 
         // Definindo os status do perfil:
             //total de jobs, jobs em andamento e encerrados
