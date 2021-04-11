@@ -1,5 +1,5 @@
 const express = require('express')  // Biblioteca para criar o servidor
-const routes = express.Router()     // Ser para criar as rotas / caminhos
+const routes = express.Router()     // Serve para criar as rotas / caminhos
 const ProfileController = require('./controllers/ProfileController')
 const JobController = require('./controllers/JobController')
 const DashboardController = require('./controllers/DashboardController')
